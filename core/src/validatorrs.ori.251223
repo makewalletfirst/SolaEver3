@@ -2051,16 +2051,13 @@ fn check_poh_speed(bank: &Bank, maybe_hash_samples: Option<u64>) -> Result<(), V
         "PoH speed check: computed hashes per second {my_hashes_per_second}, target hashes per \
          second {target_hashes_per_second}"
     );
-    /*
     if my_hashes_per_second < target_hashes_per_second {
-        warn!(
-        "SolaEver Performance Note: PoH hashes/second rate is slower than the cluster target: mine {}, cluster {}. Bypassing check...",
-        hashes_per_second, min_hashes_per_second
-        );
-
+        return Err(ValidatorError::PohTooSlow {
+            mine: my_hashes_per_second,
+            target: target_hashes_per_second,
+        });
     }
-    */
-    info!("SolaEver: PoH speed check bypassed.");
+
     Ok(())
 }
 
